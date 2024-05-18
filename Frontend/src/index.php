@@ -10,6 +10,7 @@
         <title>PCの電源をつける</title>
     </head>
     <body>
+        
         <div class="d-flex justify-content-center align-items-center">
             <div class="col-7">
 
@@ -17,7 +18,7 @@
                     <h1>PCの電源をつける</h1>
                     <p>IPアドレスとMACアドレスを入力してください</p>
                 </div>
-                
+
                 <form>
 
                     <div class="mb-3">
