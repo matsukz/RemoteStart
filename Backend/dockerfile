@@ -1,9 +1,9 @@
 FROM python:3.11.8-slim
 
-RUN mkdir /app
+RUN mkdir /src
 
-WORKDIR /app
+WORKDIR /src
 
-COPY requirements.txt /app
+COPY requirements.txt /src
 
-RUN pip install -r requirements.txt
+RUN pip install --no-cache-dir -r requirements.txt

@@ -1,15 +1,15 @@
 version: "3"
 services:
   flask:
-    container_name: remotest_flask
+    container_name: remotest_fastapi
     build: Backend/
     restart: always
     ports:
-      - 5500:5000
+      - 9004:9004
     volumes:
-      - ./Backend:/app
-    working_dir: /app
-    command: python3 app.py
+      - ./Backend/src:/src
+    working_dir: /src
+    command: uvicorn main:app --reload --host 0.0.0.0 --port 9004
     environment:
       - TZ=Asia/Tokyo
 
@@ -19,7 +19,7 @@ services:
     ports:
       - 8500:80
     volumes:
-      - ./Frontend/document:/var/www/html
+      - ./Frontend/src:/var/www/html
       - ./Frontend/php.ini:/usr/local/etc/php/php.ini
     environment:
       - TZ=Asia/Tokyo
