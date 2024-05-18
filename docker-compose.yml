@@ -1,0 +1,25 @@
+version: "3"
+services:
+  flask:
+    container_name: remotest_flask
+    build: Backend/
+    restart: always
+    ports:
+      - 5500:5000
+    volumes:
+      - ./Backend:/app
+    working_dir: /app
+    command: python3 app.py
+    environment:
+      - TZ=Asia/Tokyo
+
+  php:
+    container_name: remotest_php
+    image: php:8.2-apache
+    ports:
+      - 8500:80
+    volumes:
+      - ./Frontend/document:/var/www/html
+      - ./Frontend/php.ini:/usr/local/etc/php/php.ini
+    environment:
+      - TZ=Asia/Tokyo
