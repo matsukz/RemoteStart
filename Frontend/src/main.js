@@ -1,9 +1,14 @@
 //Buttonを押したときに発動する
 document.getElementById("exec").onclick = function(){
+    
+    function btn_disable(type){
+        var button = document.getElementById('exec');
+        button.disabled = type;        
+    }
 
-    //Buttonを無効にする
-    document.getElementById("exec").disabled = true;
-
+    //ボタン無効化
+    btn_disable(true);
+    
     //ドメイン取得
     var url = new URL(window.location.href);
     var api = url.protocol + "//" + url.hostname + ":9004/wol/"
@@ -13,7 +18,7 @@ document.getElementById("exec").onclick = function(){
     console.log(api);
     console.log(mac);
     console.log(ip);
-    
+
     //ロード画面表示
     $('#progress').html(`
         <div class="text-center">
@@ -58,6 +63,6 @@ document.getElementById("exec").onclick = function(){
     });
 
     //どっちにしてもButtonは有効にする
-    document.getElementById("exec").disabled = false;
+    btn_disable(false);
 
 };
