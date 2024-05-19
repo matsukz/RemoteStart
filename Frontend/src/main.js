@@ -1,19 +1,31 @@
 //Buttonを押したときに発動する
 document.getElementById("exec").onclick = function(){
-
-    //Buttonを無効にする
-    document.getElementById("exec").disabled = true;
-
+    
     //ドメイン取得
     var url = new URL(window.location.href);
     var api = url.protocol + "//" + url.hostname + ":9004/wol/"
     var mac = document.getElementById("input_mac").value;
     var ip = document.getElementById("input_ip").value;
 
+    //必要な値がないとこの先は進まない
+    if (mac == "" || ip == "") {
+        alert("必要な値が入力されていません");
+        return false;
+    }
+
+    //関数にしないとボタンが無効にならない
+    function btn_disable(type){
+        var button = document.getElementById('exec');
+        button.disabled = type;        
+    }
+
+    //ボタン無効化
+    btn_disable(true);    
+
     console.log(api);
     console.log(mac);
     console.log(ip);
-    
+
     //ロード画面表示
     $('#progress').html(`
         <div class="text-center">
@@ -58,6 +70,6 @@ document.getElementById("exec").onclick = function(){
     });
 
     //どっちにしてもButtonは有効にする
-    document.getElementById("exec").disabled = false;
+    btn_disable(false);
 
 };
