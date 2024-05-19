@@ -3,7 +3,7 @@ document.getElementById("exec").onclick = function(){
     
     //ドメイン取得
     var url = new URL(window.location.href);
-    var api = url.protocol + "//" + url.hostname + ":9004/wol/"
+    var api = url.protocol + "//" + url.hostname + "/api/wol/"
     var mac = document.getElementById("input_mac").value;
     var ip = document.getElementById("input_ip").value;
 
@@ -43,7 +43,7 @@ document.getElementById("exec").onclick = function(){
         contentType: 'application/json', // コンテントタイプ
         accept: 'application/json', // 受け入れるレスポンスのタイプ
         data: JSON.stringify({"mac": mac, "ip": ip }),
-        timeout: 25000
+        timeout: 10000000
     }).done(function(response) {
         //通信が成功してレスポンスが返ってきたとき
         var message = "";

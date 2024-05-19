@@ -7,7 +7,7 @@ def wake_computer(mac,ip) -> int:
     # マジックパケットを送信する関数
     try:
         wake:bool ; wake = True
-        for _ in range(20):
+        for _ in range(30):
 
             #pingを実行して対象がオンラインなのかを確認する
             ping_result = ping(ip,timeout=2)
