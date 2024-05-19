@@ -23,3 +23,10 @@ services:
       - ./Frontend/php.ini:/usr/local/etc/php/php.ini
     environment:
       - TZ=Asia/Tokyo
+
+  cloudflared:
+    image: cloudflare/cloudflared
+    container_name: remotest_cloudflared
+    command: tunnel run
+    env_file:
+      - compose.env

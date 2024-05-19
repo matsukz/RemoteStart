@@ -27,7 +27,7 @@ class Server_ping(BaseModel):
 def read_root():
   return {"Hello": "World"}
 
-@app.post("/wol/")
+@app.post("/api/wol/")
 async def wol(server: Server_wol):
 
   resutl:int ; resutl = 10
