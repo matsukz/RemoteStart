@@ -1,17 +1,19 @@
 from fastapi import FastAPI
+from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 from wol import wake_computer
 from ping import checkping
-import logging
-
-logger = logging.getLogger("uvicorn")
-handler = logging.StreamHandler()
-formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
-handler.setFormatter(formatter)
-logger.addHandler(handler)
-logger.setLevel(logging.DEBUG)
 
 app = FastAPI()
+
+#CORSエラー対策
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_credentials=True,   # 追記により追加
+    allow_methods=["*"],      # 追記により追加
+    allow_headers=["*"]       # 追記により追加
+)
 
 #サーバー情報の定義
 class Server_wol(BaseModel):
@@ -27,8 +29,6 @@ def read_root():
 
 @app.post("/wol/")
 async def wol(server: Server_wol):
-
-  logging.debug("wolが呼ばれました")
 
   resutl:int ; resutl = 10
   resutl = wake_computer(server.mac, server.ip)
