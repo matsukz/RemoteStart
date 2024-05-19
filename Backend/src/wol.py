@@ -14,13 +14,16 @@ def wake_computer(mac,ip) -> int:
     # マジックパケットを送信する関数
     try:
         wake:bool ; wake = True
-        for _ in range(10):
+        for _ in range(20):
 
+            #pingを実行して対象がオンラインなのかを確認する
             ping_result = ping(ip,timeout=2)
             if ping_result == False or ping_result is None:
+                #応答があるなら続行する
                 wake = True
 
             else:
+                #応答があればFastAPIに0を返す
                 return 0
 
             logging.debug(f"PINGの結果は{wake}でした")
@@ -31,16 +34,8 @@ def wake_computer(mac,ip) -> int:
 
             time.sleep(1)
 
-        return 1
+        return 1 #20回のうちにオンラインにならなければ1を返す
     
     except Exception as e:
+        #エラーが発生したら2を返す
         return 2
-
-# 使用例
-# mac = '047C16A35C06'
-# ip = "192.168.11.21"
-#wake_computer(mac,ip)
-
-# def test(mac,ip):
-#     return {"mac":mac,"ip":ip}
-
