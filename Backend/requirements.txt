@@ -3,3 +3,4 @@ wakeonlan
 ping3
 uvicorn
 fastapi
+pydantic
